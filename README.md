@@ -50,3 +50,24 @@ rop machineはROP (Return Oriented Programming)の練習用のツールです。
 コマンドとして0を入力すると`rop start`の位置の命令が実行されます。
 ちなみに上をそのまま実行するとsystemの位置でsegmentation faultで落ちます。
 うまくROPのプログラムが組まれているとシェルを呼び出すことができます。
+
+任意のアドレスや値を入れたい場合には`1. append hex value`を使います。
+以下が`0xdead`と`0xbeaf`の値を追加した例です。
+
+```
+> 1
+hex value?: 0xDEAD
+0x000000000000dead is appended
+> 1
+hex value?: 0xBEAF
+0x000000000000beaf is appended
+> 9
+     rop_arena
++--------------------+
+| 0x000000000000dead |<- rop start
++--------------------+
+| 0x000000000000beaf |
++--------------------+
+```
+
+この状態で0で実行すると当たり前ですがsegmentation faultで落ちます。
